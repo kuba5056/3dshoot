@@ -1,0 +1,47 @@
+// The arena. The game looks entities up by name:
+//   "Start"  - where the player appears (transform only)
+//   "Target" - plates to shoot; they drop away when hit and come back
+// Everything else is scenery: static boxes, and crates and barrels with
+// rigid bodies that shots push around.
+(
+    entities: [
+        (name: "Sun", transform: (rotation: (-0.432607, 0.380028, 0.207921, 0.790695)), directional_light: (intensity: 2.2)),
+        (name: "Start", transform: (translation: (0.0, 1.0, 14.0))),
+        (name: "Floor", transform: (translation: (0.0, -0.5, 0.0), scale: (44.0, 1.0, 44.0)), visual: Cube(size: 1.0, material: (base_color: (0.3, 0.33, 0.31, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Wall north", transform: (translation: (0.0, 2.5, -22.0), scale: (44.0, 5.0, 1.0)), visual: Cube(size: 1.0, material: (base_color: (0.34, 0.36, 0.4, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Wall south", transform: (translation: (0.0, 2.5, 22.0), scale: (44.0, 5.0, 1.0)), visual: Cube(size: 1.0, material: (base_color: (0.34, 0.36, 0.4, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Wall west", transform: (translation: (-22.0, 2.5, 0.0), scale: (1.0, 5.0, 44.0)), visual: Cube(size: 1.0, material: (base_color: (0.34, 0.36, 0.4, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Wall east", transform: (translation: (22.0, 2.5, 0.0), scale: (1.0, 5.0, 44.0)), visual: Cube(size: 1.0, material: (base_color: (0.34, 0.36, 0.4, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (-6.0, 0.7, -4.0), scale: (4.0, 1.4, 1.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (6.0, 1.1, -8.0), scale: (1.0, 2.2, 5.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (-10.0, 1.1, 6.0), scale: (1.0, 2.2, 6.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (3.0, 0.5, 4.0), scale: (3.0, 1.0, 3.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (12.0, 0.7, 2.0), scale: (5.0, 1.4, 1.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Cover", transform: (translation: (-3.0, 1.1, -13.0), scale: (6.0, 2.2, 1.0)), visual: Cube(size: 1.0, material: (base_color: (0.2, 0.21, 0.24, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Platform", transform: (translation: (15.0, 1.0, -14.0), scale: (8.0, 2.0, 8.0)), visual: Cube(size: 1.0, material: (base_color: (0.34, 0.36, 0.4, 1.0), roughness: 0.9, metallic: 0.0)), collider: (friction: 0.9)),
+        (name: "Ramp", transform: (translation: (8.6, 0.9, -14.0), rotation: (0.0, 0.0, 0.1736, 0.9848), scale: (6.2, 0.3, 3.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0), roughness: 0.9)), collider: (friction: 1.0)),
+        (name: "Crate", transform: (translation: (-14.0, 0.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Crate", transform: (translation: (-13.0, 0.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Crate", transform: (translation: (-12.0, 0.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Crate", transform: (translation: (-13.5, 1.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Crate", transform: (translation: (-12.5, 1.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Crate", transform: (translation: (-13.0, 2.5, -12.0)), visual: Cube(size: 1.0, material: (base_color: (0.62, 0.44, 0.24, 1.0))), collider: (density: 0.4), rigid_body: ()),
+        (name: "Barrel", transform: (translation: (9.0, 0.5, 12.0)), visual: Sphere(radius: 0.5, material: (base_color: (0.75, 0.12, 0.1, 1.0), metallic: 1.0, roughness: 0.45)), collider: (shape: Sphere(radius: 0.5), restitution: 0.3, density: 0.6), rigid_body: ()),
+        (name: "Barrel", transform: (translation: (10.2, 0.5, 12.4)), visual: Sphere(radius: 0.5, material: (base_color: (0.75, 0.12, 0.1, 1.0), metallic: 1.0, roughness: 0.45)), collider: (shape: Sphere(radius: 0.5), restitution: 0.3, density: 0.6), rigid_body: ()),
+        (name: "Barrel", transform: (translation: (9.4, 0.5, 13.3)), visual: Sphere(radius: 0.5, material: (base_color: (0.75, 0.12, 0.1, 1.0), metallic: 1.0, roughness: 0.45)), collider: (shape: Sphere(radius: 0.5), restitution: 0.3, density: 0.6), rigid_body: ()),
+        (name: "Target", transform: (translation: (-8.0, 1.6, -21.2), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (0.0, 2.2, -21.2), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (8.0, 1.6, -21.2), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (15.0, 3.6, -17.5), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (21.2, 1.8, 4.0), rotation: (0.0, 0.7071, 0.0, 0.7071), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (-21.2, 1.8, -6.0), rotation: (0.0, 0.7071, 0.0, 0.7071), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (-21.2, 2.6, 10.0), rotation: (0.0, 0.7071, 0.0, 0.7071), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (4.0, 1.6, 21.2), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (-6.0, 2.6, -4.0), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Target", transform: (translation: (12.0, 2.6, 2.0), rotation: (0.0, 0.0, 0.0, 1.0), scale: (1.0, 1.0, 0.15)), visual: Cube(size: 1.0, material: (base_color: (0.05, 0.05, 0.05, 1.0), emissive: (3.0, 1.1, 0.1))), collider: ()),
+        (name: "Lamp", transform: (translation: (-12.0, 4.2, -12.0)), point_light: (color: (1.0, 0.75, 0.45), intensity: 9.0, range: 16.0)),
+        (name: "Lamp", transform: (translation: (14.0, 5.2, -14.0)), point_light: (color: (0.5, 0.7, 1.0), intensity: 9.0, range: 16.0)),
+        (name: "Lamp", transform: (translation: (8.0, 4.2, 12.0)), point_light: (color: (1.0, 0.75, 0.45), intensity: 9.0, range: 16.0)),
+        (name: "Lamp", transform: (translation: (-10.0, 4.2, 10.0)), point_light: (color: (0.6, 0.8, 1.0), intensity: 9.0, range: 16.0)),
+    ],
+)
